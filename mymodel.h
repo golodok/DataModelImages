@@ -46,6 +46,7 @@ private:
     QString m_ptxMask;
     QString  m_ptxDir;
     QList<QPixmap> m_qlpixList;
+    QStringList m_qstrlPath;
 };
 
 #endif // MYMODEL_H

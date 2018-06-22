@@ -3,7 +3,7 @@
 myModel::myModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    setDir("C:/work/Test/DataModel/DataModel/Image");
+    setDir("C:/image");
     setMask("*.jpg *.png");
     m_qlpixList = getIcon(QDir(m_ptxDir));
 }
@@ -32,6 +32,9 @@ QVariant myModel::data(const QModelIndex &index, int role) const
         QPixmap pix(m_qlpixList.at(index.row()));
         return pix;
     }
+    case pathToImg:{
+            return "file:///./image/"+ m_qstrlPath.at(index.row());
+        }
     default:
         return QVariant();
         return QVariant();
@@ -165,6 +168,7 @@ QList<QPixmap> myModel::getIcon(const QDir &dir)
 {
     QList<QPixmap> tmpqlpixList;
     QStringList listFiles = QDir(m_ptxDir).entryList(m_ptxMask.split(" "),QDir::Files);
+    m_qstrlPath = listFiles;
     foreach(QString file,listFiles){
         tmpqlpixList.push_back(QPixmap(QDir(m_ptxDir).absoluteFilePath(file)));
     }
