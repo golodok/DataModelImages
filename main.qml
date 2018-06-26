@@ -1,19 +1,17 @@
 import QtQuick 2.8
-import QtQuick.Window 2.3
+import QtQml.Models 2.1
 import QtQuick.Controls 2.0
 
 Rectangle{
     width:420
     height: 430
     visible:  true
-    Drag.active: dragArea.held
 
     Component{
         id: imgDelegate
-
         Item
         {
-            id: wrapper
+            id: dragRect
             width: itemImage.width
             height: itemImage.height
 
@@ -29,7 +27,35 @@ Rectangle{
                 fillMode: Image.PreserveAspectFit
                 source: pathToImg
             }
+            MouseArea {
+                id: mouseArea
+                property int visualIndex: imgModel.itemsIndex
+                anchors.fill: parent
+                drag.target: dragRect
+                Drag.source: imgDelegate
+            }
+            states: [
+                State {
+                    when: icon.Drag.active
+                    ParentChange {
+                        target: dragRect
+                        parent: imgDelegate
+                    }
+
+                    AnchorChanges {
+                        target: itemImage;
+                        anchors.horizontalCenter: undefined;
+                        anchors.verticalCenter: undefined
+                    }
+                }
+            ]
+            DropArea {
+                anchors { fill: parent; margins: 15 }
+
+                onEntered: imgModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
+            }
         }
+
 
     }
 
@@ -53,6 +79,8 @@ Rectangle{
         anchors.margins: 10
         model:imgModel
         delegate: imgDelegate
+        property int dragItemIndex: -1
+
     }
     Path{
         id:itemsPath

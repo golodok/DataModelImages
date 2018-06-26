@@ -158,6 +158,11 @@ bool myModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row
     return true;
 }
 
+void myModel::move(int src, int dst)
+{
+
+}
+
 Qt::DropActions myModel::supportedDropActions() const
 {
     return Qt::CopyAction | Qt::MoveAction;

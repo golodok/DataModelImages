@@ -9,14 +9,7 @@ int main(int argc, char *argv[])
     connectQmlFromModel con;
 
     con.show();
-      myModel model;
-//    QListView *listView = new QListView;
-//    listView->setDragEnabled(true);
-//    listView->setAcceptDrops(true);
-//    listView->setModel(model);
-//    listView->setDefaultDropAction(Qt::MoveAction);
-//    listView->setDragDropOverwriteMode(false);
-//    listView->show();
+    myModel model;
     QTableView *tableView = new QTableView;
     tableView->setDragDropOverwriteMode(false);
     tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);

@@ -36,7 +36,7 @@ public:
     QStringList mimeTypes() const;
     QMimeData *mimeData(const QModelIndexList &indexes) const;
     bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
-
+    Q_INVOKABLE void move ( int src ,  int dst ) ;
 
     Qt::DropActions supportedDropActions() const;
 
